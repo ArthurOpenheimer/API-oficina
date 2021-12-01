@@ -1,9 +1,18 @@
 from django.db import models
 
-class Usuario(models.Model):
+
+class Cliente(models.Model):
     nome = models.CharField(max_length=30)
     endereco = models.CharField(max_length=30)
-    cpf = models.CharField(max_length=30)
+    cpf = models.CharField(max_length=11)
+
+    def __str__(self):
+        return self.nome
+
+class Funcionario(models.Model):
+    nome = models.CharField(max_length=30)
+    endereco = models.CharField(max_length=30)
+    cpf = models.CharField(max_length=11)
 
     def __str__(self):
         return self.nome
@@ -20,7 +29,7 @@ class Veiculo(models.Model):
     marca = models.CharField(max_length=30)
     tipo = models.CharField(max_length=30)
     ano = models.CharField(max_length=30)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.modelo

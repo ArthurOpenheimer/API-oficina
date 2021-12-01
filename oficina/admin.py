@@ -1,16 +1,21 @@
 from re import search
 from django.contrib import admin
-from .models import Usuario, Servico, Veiculo
+from .models import Cliente, Funcionario, Servico, Veiculo
 
-admin.site.register(Usuario)
+admin.site.register(Cliente)
+admin.site.register(Funcionario)
 admin.site.register(Servico)
 admin.site.register(Veiculo)
 
-class Usuario(admin.ModelAdmin):
+class Cliente(admin.ModelAdmin):
     list_display = ('id', 'nome', 'cpf', 'endereco')
     list_display_links = ('id', 'nome')
     search_fields = ('nome',)
 
+class Funcionario(admin.ModelAdmin):
+    list_display = ('id', 'nome', 'cpf', 'endereco')
+    list_display_links = ('id', 'nome')
+    search_fields = ('nome',)
 
 class Servico(admin.ModelAdmin):
     list_display = ('id', 'nome', 'valor')
