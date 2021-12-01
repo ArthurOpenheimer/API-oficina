@@ -16,7 +16,12 @@ class ServicoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class VeiculoSerializer(serializers.ModelSerializer):
+    nome_usuario = serializers.ReadOnlyField(source='usuario.nome')
     class Meta:
         model = Veiculo
-        fields = ['modelo', 'marca', 'tipo', 'ano', 'usuario']
+        fields = ['modelo', 'marca', 'tipo', 'ano', 'nome_usuario']
 
+class ListaVeiculosUsuariosSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Veiculo
+        fields = ['modelo', 'marca', 'tipo', 'ano']
