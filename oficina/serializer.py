@@ -17,4 +17,5 @@ class ServicoSerializer(serializers.ModelSerializer):
 class VeiculoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Veiculo
-        fields = '__all__'
+        fields = ['modelo', 'marca', 'tipo', 'ano']
+

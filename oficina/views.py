@@ -18,3 +18,4 @@ class VeiculoViewSet(viewsets.ModelViewSet):
     """vrum vrum"""
     queryset = Veiculo.objects.all()
     serializer_class = VeiculoSerializer
+

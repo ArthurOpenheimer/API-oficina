@@ -21,3 +21,4 @@ class Veiculo(admin.ModelAdmin):
     list_display = ('id', 'modelo', 'marca', 'tipo', 'ano')
     list_display_links = ('id','modelo')
     search_fields = ('modelo',)
+
