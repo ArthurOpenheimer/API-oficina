@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import fields
 from rest_framework import serializers
+from oficina.admin import Usuario
 from oficina.models import Usuario, Servico, Veiculo
 
 
@@ -17,5 +18,5 @@ class ServicoSerializer(serializers.ModelSerializer):
 class VeiculoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Veiculo
-        fields = ['modelo', 'marca', 'tipo', 'ano']
+        fields = ['modelo', 'marca', 'tipo', 'ano', 'usuario']
 
