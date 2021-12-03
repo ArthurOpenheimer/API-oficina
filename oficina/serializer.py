@@ -42,11 +42,5 @@ class ServicosRealizadosPorVeiculoSerializer(serializers.ModelSerializer):
     nome_servico = serializers.ReadOnlyField(source='servico.nome')
     valor_servico = serializers.ReadOnlyField(source='servico.valor')
     class Meta:
-        model = ServicoRealizado
+        model = ServicoRealizado   
         fields = ['nome_servico', 'valor_servico']
-
-#class ValorTotalServicosRealizadosPorVeiculoSerializer(serializers.ModelSerializer):
-#    valor_servico = serializers.ReadOnlyField(source='servico.valor')
-#    class Meta:
-#        model = ServicoRealizado and Cliente  
-#        fields = ['valor_servico']

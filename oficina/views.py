@@ -45,10 +45,5 @@ class ServicosRealizados(generics.ListAPIView):
         return queryset
     serializer_class = ServicoRealizadoSerializer
     
-#class ValorTotalServicosRealizados(generics.ListAPIView):
-##    "Valor total de serviços realizados em um veículo"
-#    def get_queryset(self):
-#        valor_total = sum(Servico.valor for Servico in ServicoRealizado.objects.filter(veiculo_id=self.kwargs['pk']))
-#        queryset = ServicoRealizado.objects.filter(funcionario_id=self.kwargs['pk']).aggregate(valor_total)
-#        return queryset
-#    serializer_class = ServicosRealizadosPorVeiculoSerializer
+
+

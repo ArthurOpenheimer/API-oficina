@@ -5,10 +5,10 @@ from rest_framework import routers
 
 
 router = routers.DefaultRouter()
-router.register('cliente', ClienteViewSet, basename = 'cliente')
-router.register('funcionario', FuncionarioViewSet, basename = 'funcionario')
-router.register('servico', ServicoViewSet, basename = 'servico')
-router.register('veiculo', VeiculoViewSet, basename = 'veiculo')
+router.register('cliente', ClienteViewSet, basename = 'clientes')
+router.register('funcionario', FuncionarioViewSet, basename = 'funcionarios')
+router.register('servico', ServicoViewSet, basename = 'servicos')
+router.register('veiculo', VeiculoViewSet, basename = 'veiculos')
 
 
 urlpatterns = [
@@ -17,5 +17,4 @@ urlpatterns = [
     path('cliente/<int:pk>/veiculos/', ListaVeiculosClientes.as_view()),
     path('funcionario/<int:pk>/servicos/', ServicosRealizados.as_view()),
     path('veiculo/<int:pk>/servicos/', ServicosRealizadosPorVeiculo.as_view()),
-#    path('veiculo/<int:pk>/valor/', ValorTotalServicosRealizados.as_view())
 ]
