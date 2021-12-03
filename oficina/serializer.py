@@ -5,8 +5,6 @@ from oficina.admin import Cliente, Funcionario
 from oficina.models import Cliente, Funcionario, Servico, Veiculo, ServicoRealizado
 
 
-
-
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
@@ -34,18 +32,21 @@ class ListaVeiculosClientesSerializer(serializers.ModelSerializer):
         fields = ['modelo', 'marca', 'tipo', 'ano']
 
 class ServicoRealizadoSerializer(serializers.ModelSerializer):
-    nome_veiculo = serializers.ReadOnlyField(source='veiculo.modelo')
-    nome_servico = serializers.ReadOnlyField(source='servico.nome')
-    valor_servico = serializers.ReadOnlyField(source='servico.valor')
-    data = serializers.ReadOnlyField(source='servicorealizado.data')
-    class Meta:
-        model = Servico
-        fields = ['nome_servico', 'valor_servico', 'nome_veiculo', 'data']
-
-class ServicosPorVeiculoSerializer(serializers.ModelSerializer):
-    nome_cliente = serializers.ReadOnlyField(source='cliente.nome')
     nome_servico = serializers.ReadOnlyField(source='servico.nome')
     valor_servico = serializers.ReadOnlyField(source='servico.valor')
     class Meta:
         model = ServicoRealizado
-        fields = ['nome_servico', 'valor_servico', 'nome_cliente']
+        fields = ['id', 'nome_servico', 'valor_servico', 'veiculo', 'data']   
+
+class ServicosRealizadosPorVeiculoSerializer(serializers.ModelSerializer):
+    nome_servico = serializers.ReadOnlyField(source='servico.nome')
+    valor_servico = serializers.ReadOnlyField(source='servico.valor')
+    class Meta:
+        model = ServicoRealizado
+        fields = ['nome_servico', 'valor_servico']
+
+#class ValorTotalServicosRealizadosPorVeiculoSerializer(serializers.ModelSerializer):
+#    valor_servico = serializers.ReadOnlyField(source='servico.valor')
+#    class Meta:
+#        model = ServicoRealizado and Cliente  
+#        fields = ['valor_servico']

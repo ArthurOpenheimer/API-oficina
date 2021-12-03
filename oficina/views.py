@@ -2,7 +2,7 @@ from django.db.models import query
 from django.db.models.query import QuerySet
 from rest_framework import viewsets,  generics
 from oficina.models import Cliente, Funcionario, Servico, ServicoRealizado, Veiculo
-from oficina.serializer import ClienteSerializer, FuncionarioSerializer, ServicoSerializer, VeiculoSerializer,ListaVeiculosClientesSerializer,ServicoRealizadoSerializer, ServicosPorVeiculoSerializer
+from oficina.serializer import ClienteSerializer, FuncionarioSerializer, ServicoSerializer, VeiculoSerializer,ListaVeiculosClientesSerializer,ServicoRealizadoSerializer, ServicosRealizadosPorVeiculoSerializer
 
 class ClienteViewSet(viewsets.ModelViewSet):
     "Clientes cadastrados"
@@ -13,7 +13,6 @@ class FuncionarioViewSet(viewsets.ModelViewSet):
     "Funcionários cadastrados"
     queryset = Funcionario.objects.all()
     serializer_class = FuncionarioSerializer
-
 
 class ServicoViewSet(viewsets.ModelViewSet):
     "Serviços cadastrados que podem ser realizados"
@@ -32,13 +31,12 @@ class ListaVeiculosClientes(generics.ListAPIView):
         return queryset
     serializer_class = ListaVeiculosClientesSerializer
 
-class ServicosPorVeiculo(generics.ListAPIView):
-    "Serviços que um respectivo veículo recebeu"
+class ServicosRealizadosPorVeiculo(generics.ListAPIView):
+    "Serviços realizados em um respectivo veículo"
     def get_queryset(self):
         queryset = ServicoRealizado.objects.filter(veiculo_id=self.kwargs['pk'])
         return queryset
-    serializer_class = ServicosPorVeiculoSerializer
-
+    serializer_class = ServicosRealizadosPorVeiculoSerializer
 
 class ServicosRealizados(generics.ListAPIView):
     "Serviços que um respectivo funcionário realizou"
@@ -47,3 +45,10 @@ class ServicosRealizados(generics.ListAPIView):
         return queryset
     serializer_class = ServicoRealizadoSerializer
     
+#class ValorTotalServicosRealizados(generics.ListAPIView):
+##    "Valor total de serviços realizados em um veículo"
+#    def get_queryset(self):
+#        valor_total = sum(Servico.valor for Servico in ServicoRealizado.objects.filter(veiculo_id=self.kwargs['pk']))
+#        queryset = ServicoRealizado.objects.filter(funcionario_id=self.kwargs['pk']).aggregate(valor_total)
+#        return queryset
+#    serializer_class = ServicosRealizadosPorVeiculoSerializer

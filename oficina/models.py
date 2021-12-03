@@ -19,7 +19,7 @@ class Funcionario(models.Model):
 
 class Servico(models.Model):
     nome = models.CharField(max_length=30)
-    valor = models.CharField(max_length=30)
+    valor = models.IntegerField()
 
     def __str__(self):
         return self.nome
