@@ -1,8 +1,8 @@
-from django.db.models import query
+from django.db.models import query, Sum
 from django.db.models.query import QuerySet
-from rest_framework import viewsets,  generics
-from oficina.models import Cliente, Funcionario, Servico, ServicoRealizado, Veiculo
-from oficina.serializer import ClienteSerializer, FuncionarioSerializer, ServicoSerializer, VeiculoSerializer,ListaVeiculosClientesSerializer,ServicoRealizadoSerializer, ServicosRealizadosPorVeiculoSerializer
+from rest_framework import serializers, viewsets,  generics
+from oficina.models import Cliente, Funcionario, Servico, Veiculo
+from oficina.serializer import ClienteSerializer, FuncionarioSerializer, ServicoSerializer, VeiculoSerializer,ListaVeiculosClientesSerializer,ServicoRealizadoSerializer, ServicosRealizadosPorVeiculoSerializer, ValorTotalServicosRealizadosPorVeiculoSerializer
 
 class ClienteViewSet(viewsets.ModelViewSet):
     "Clientes cadastrados"
@@ -34,16 +34,22 @@ class ListaVeiculosClientes(generics.ListAPIView):
 class ServicosRealizadosPorVeiculo(generics.ListAPIView):
     "Serviços realizados em um respectivo veículo"
     def get_queryset(self):
-        queryset = ServicoRealizado.objects.filter(veiculo_id=self.kwargs['pk'])
+        queryset = Servico.objects.filter(veiculo_id=self.kwargs['pk'])
         return queryset
     serializer_class = ServicosRealizadosPorVeiculoSerializer
 
 class ServicosRealizados(generics.ListAPIView):
     "Serviços que um respectivo funcionário realizou"
     def get_queryset(self):
-        queryset = ServicoRealizado.objects.filter(funcionario_id=self.kwargs['pk'])
+        queryset = Servico.objects.filter(funcionario_id=self.kwargs['pk'])
         return queryset
     serializer_class = ServicoRealizadoSerializer
     
-
+class ValorTotalServicosRealizados(generics.ListAPIView):
+    "Valor total dos serviços realizados"
+    
+    def get_queryset(self):
+        queryset = Servico.objects.filter(funcionario_id=self.kwargs['pk']).aggregate(Sum('valor'))
+        return queryset
+    serializer_class = ValorTotalServicosRealizadosPorVeiculoSerializer
 
