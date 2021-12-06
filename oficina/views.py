@@ -54,5 +54,4 @@ class ValorTotal(views.APIView):
     def get(self,request, *args, **kwargs):  
         HttpResponseRedirect(reverse('valor_total', kwargs={'pk': self.kwargs['pk']}))
         servico_object = Servico.objects.filter(veiculo_id=self.kwargs['pk']).aggregate(valor_total = Sum('valor'))
-        servico_object = servico_object
         return Response(servico_object)
