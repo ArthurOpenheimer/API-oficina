@@ -18,6 +18,7 @@ class FuncionarioSerializer(serializers.ModelSerializer):
         fields = ['id', 'nome', 'cpf', 'endereco']
 
 class ServicoSerializer(serializers.ModelSerializer):
+    data = serializers.DateField(format='%d/%m/%Y')
     class Meta:
         model = Servico
         fields = '__all__'
@@ -33,6 +34,7 @@ class ListaVeiculosClientesSerializer(serializers.ModelSerializer):
         fields = ['modelo', 'marca', 'tipo', 'ano']
 
 class ServicoRealizadoSerializer(serializers.ModelSerializer):
+    data = serializers.DateField(format='%d/%m/%Y')
     class Meta:
         model = Servico
         fields = ['id', 'nome', 'valor', 'veiculo', 'data']   
