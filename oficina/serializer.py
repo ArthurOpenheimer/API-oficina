@@ -1,6 +1,8 @@
 from django.db import models
 from django.db.models import fields
 from rest_framework import serializers
+from rest_framework.fields import ReadOnlyField
+from rest_framework.viewsets import ReadOnlyModelViewSet
 from oficina.admin import Cliente, Funcionario
 from oficina.models import Cliente, Funcionario, Servico, Veiculo
 
@@ -18,13 +20,12 @@ class FuncionarioSerializer(serializers.ModelSerializer):
 class ServicoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Servico
-        fields = ['id', 'nome', 'valor']
+        fields = '__all__'
 
 class VeiculoSerializer(serializers.ModelSerializer):
-    nome_cliente = serializers.ReadOnlyField(source='cliente.nome')
     class Meta:
         model = Veiculo
-        fields = ['id', 'modelo', 'marca', 'tipo', 'ano', 'nome_cliente']
+        fields = ['id', 'modelo', 'marca', 'tipo', 'ano', 'cliente']
 
 class ListaVeiculosClientesSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,17 +33,16 @@ class ListaVeiculosClientesSerializer(serializers.ModelSerializer):
         fields = ['modelo', 'marca', 'tipo', 'ano']
 
 class ServicoRealizadoSerializer(serializers.ModelSerializer):
-    nome_veiculo = serializers.ReadOnlyField(source='veiculo.modelo')
     class Meta:
         model = Servico
-        fields = ['id', 'nome', 'valor', 'nome_veiculo', 'data']   
+        fields = ['id', 'nome', 'valor', 'veiculo', 'data']   
 
 class ServicosRealizadosPorVeiculoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Servico
         fields = ['nome', 'valor']
 
-class ValorTotalServicosRealizadosPorVeiculoSerializer(serializers.ModelSerializer):
-    class Meta():
-        model = Servico
-        fields = ['valor']
+class ValorTotalServicosRealizadosPorVeiculoSerializer(serializers.Serializer):
+    valor_total = serializers.ReadOnlyField(source = 'veiculo.valor')
+    class Meta:
+        fields = ['valor_total']

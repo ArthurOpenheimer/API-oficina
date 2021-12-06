@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 
+
 class Cliente(models.Model):
     nome = models.CharField(max_length=30)
     endereco = models.CharField(max_length=30)
@@ -29,13 +30,10 @@ class Veiculo(models.Model):
         
 class Servico(models.Model):
     nome = models.CharField(max_length=30)
-    valor = models.IntegerField()
+    valor = models.DecimalField(decimal_places=2, max_digits=10)
     funcionario = models.ForeignKey(Funcionario, on_delete=models.CASCADE)
     data = models.DateField(default=datetime.today())
     veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nome
-
-
-

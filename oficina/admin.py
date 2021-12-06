@@ -17,12 +17,14 @@ class Funcionario(admin.ModelAdmin):
     list_display_links = ('id', 'nome')
     search_fields = ('nome',)
 
+class Veiculo(admin.ModelAdmin):
+    list_display = ('id', 'modelo', 'marca', 'tipo', 'ano')
+    list_display_links = ('id','modelo')
+    search_fields = ('modelo',)
+    
 class Servico(admin.ModelAdmin):
     list_display = ('id', 'nome', 'valor')
     list_display_links = ('id', 'nome')
     search_fields = ('nome',)
 
-class Veiculo(admin.ModelAdmin):
-    list_display = ('id', 'modelo', 'marca', 'tipo', 'ano')
-    list_display_links = ('id','modelo')
-    search_fields = ('modelo',)
+
