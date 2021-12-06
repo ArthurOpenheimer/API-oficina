@@ -14,6 +14,9 @@ A API possui rotas para listar todos os dados citados, além de também listar:<
 • Servicos realizados por um funcionário.<br />
 
 
+O projeto conta com um export do Insomnia, localizado [here]https://github.com/ArthurOpenheimer/API-oficina/tree/main/documentos<br />
+
+
 ## Instalação
 Antes de começar, você deve ter instalado o [Git](https://git-scm.com) em seu computador, além disso é bom ter um editor para trabalhar com o código como por exemplo, o [VSCode](https://code.visualstudio.com/)
 
@@ -22,11 +25,11 @@ Antes de começar, você deve ter instalado o [Git](https://git-scm.com) em seu 
 $ git clone https://github.com/ArthurOpenheimer/API-oficina.git
 ```
 
-2- Abra a pasta "API-oficina", de preferência em um terminal
+2- Abra a pasta "API-oficina" em um terminal
 
 3- Instale os requerimentos(requirements.txt) usando o seguinte comando:
 ```bash
-$ pip install <nome dos requerimentos>
+$ pip install -U -r requirements.txt
 ```
 
 4- No terminal, rode o seguinte comando para inicializar o servidor:
